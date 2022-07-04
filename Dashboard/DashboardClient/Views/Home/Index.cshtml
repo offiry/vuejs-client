@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container" id="home-component">
+    <div class="row">
+        <div class="col-2">
+            <input class="form-control" v-model="filter" placeholder="Search..." />
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-6">
+            @*<b-table striped hover :items="filteredProducts"></b-table>*@
+            <b-overlay :show="loader" rounded="sm" opacity="0.4">
+                <table class="table table-bordered table-hover" style="min-height:250px">
+                    <thead>
+                        <tr>
+                            <th>SKU</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(product, index) in filteredProducts">
+                            <th>{{product.sku}}</th>
+                            <th>{{product.name}}</th>
+                            <th>{{product.price}}</th>
+                            <th><img :src="product.image" width="50" height="50"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </b-overlay>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/home/home.service.js" asp-append-version="true"></script>
+    <script src="~/home/home.mixin.js" asp-append-version="true"></script>
+    <script src="~/home/home.component.js" asp-append-version="true"></script>
+}
